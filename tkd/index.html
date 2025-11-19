@@ -15,14 +15,15 @@
             --success-color: #2ecc71;
         }
 
+         /* ===== Background ===== */
         body {
-            background-color: #f5f7fa;
-            font-family: Arial, sans-serif;
-            color: var(--dark-color);
             margin: 0;
             padding: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            color: var(--dark-color);
+            background: url('https://images.unsplash.com/photo-1560264280-88b68371db39?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8b2ZmaWNlJTIwd29ya3xlbnwwfHwwfHx8MA%3D%3D) center/cover no-repeat fixed;
         }
-
+    
         .container {
             max-width: 900px;
             margin: auto;
@@ -251,7 +252,9 @@
                 <input type="text" id="divisi" required>
             </div>
 
-            <button type="button" class="btn" id="btn-next">Lanjut ke Tes</button>
+            <button type="button" class="btn" id="btn-next">
+                <i class="bi bi-arrow-right-circle"></i> Lanjut ke Tes
+            </button>
         </form>
     </section>
 
@@ -265,8 +268,13 @@
             <div id="questions-container"></div>
 
             <div class="btn-container">
-                <button type="button" class="btn" id="btn-prev"><= Kembali</button>
-                <button type="submit" class="btn">Kirim Jawaban => </button>
+                <button type="button" class="btn btn-danger" id="btn-prev">
+                    <i class="bi bi-arrow-left-circle"></i> Kembali
+                </button>
+
+                <button type="submit" class="btn">
+                    <i class="bi bi-send-fill"></i> Kirim Jawaban
+                </button>
             </div>
         </form>
     </section>
