@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test TKD level GM </title>
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
     <style>
         :root {
@@ -15,14 +17,18 @@
             --success-color: #2ecc71;
         }
 
+
+        /* ===== Background ===== */
         body {
-            background-color: #f5f7fa;
-            font-family: Arial, sans-serif;
-            color: var(--dark-color);
             margin: 0;
             padding: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            color: var(--dark-color);
+            background: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat fixed;
         }
 
+
+        
         .container {
             max-width: 900px;
             margin: auto;
@@ -251,7 +257,9 @@
                 <input type="text" id="divisi" required>
             </div>
 
-            <button type="button" class="btn" id="btn-next">Lanjut ke Tes</button>
+            <button type="button" class="btn" id="btn-next">
+                <i class="bi bi-arrow-right-circle"></i> Lanjut ke Tes
+            </button>
         </form>
     </section>
 
@@ -266,8 +274,13 @@
             <div id="questions-container"></div>
 
             <div class="btn-container">
-                <button type="button" class="btn" id="btn-prev"><= Kembali</button>
-                <button type="submit" class="btn">Kirim Jawaban => </button>
+                <button type="button" class="btn btn-danger" id="btn-prev">
+                    <i class="bi bi-arrow-left-circle"></i> Kembali
+                </button>
+
+                <button type="submit" class="btn">
+                    <i class="bi bi-send-fill"></i> Kirim Jawaban
+                </button>
             </div>
         </form>
     </section>
@@ -291,8 +304,8 @@
             <button class="modal-btn" id="modal-ok-btn">OK</button>
         </div>
     </div>
-
 </div>
+
 
 <script>
 /* =============================
