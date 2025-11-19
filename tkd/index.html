@@ -397,8 +397,8 @@ function generateQuestionsHTML() {
 document.getElementById("btn-next").onclick = () => {
     // Validasi biodata sebelum lanjut
     const nama = document.getElementById("nama").value.trim();
-    const telepon = document.getElementById("npp").value.trim();
-    const posisi = document.getElementById("divisi").value.trim();
+    const npp = document.getElementById("npp").value.trim();
+    const divisi = document.getElementById("divisi").value.trim();
     
     
     if (!nama || !npp || !divisi ) {
@@ -434,8 +434,8 @@ document.getElementById("tes-form").onsubmit = async (e) => {
 
     const biodata = {
         nama: document.getElementById("nama").value,
-        telepon: document.getElementById("npp").value,
-        posisi: document.getElementById("divisi").value,
+        npp: document.getElementById("npp").value,
+        divisi: document.getElementById("divisi").value,
         
     };
 
