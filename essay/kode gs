@@ -1,0 +1,35 @@
+function doPost(e) {
+  try {
+    // Membuka spreadsheet berdasarkan ID
+    var sheet = SpreadsheetApp.openById('1xz6UeG7nSfFQSstiIEBSo-GP7-GTtI-ZdpogWZdCVrg').getActiveSheet();
+    
+    // Mendapatkan data dari form
+    var nama = e.parameter.nama;
+    var npp = e.parameter.npp;
+    var divisi = e.parameter.divisi;
+    var jawaban1 = e.parameter.jawaban1;
+    var jawaban2 = e.parameter.jawaban2;
+    var jawaban3 = e.parameter.jawaban3;
+    var jawaban4 = e.parameter.jawaban4;
+    var jawaban5 = e.parameter.jawaban5;
+    var timestamp = e.parameter.timestamp;
+    
+    // Menambahkan header jika spreadsheet kosong
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow(['Timestamp', 'Nama', 'NPP', 'Divisi', 'Jawaban 1', 'Jawaban 2', 'Jawaban 3', 'Jawaban 4', 'Jawaban 5']);
+    }
+    
+    // Menambahkan data baru
+    sheet.appendRow([timestamp, nama, npp, divisi, jawaban1, jawaban2, jawaban3, jawaban4, jawaban5]);
+    
+    // Mengembalikan respons sukses
+    return ContentService
+      .createTextOutput(JSON.stringify({'result': 'success', 'row': sheet.getLastRow()}))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch (error) {
+    // Mengembalikan respons error
+    return ContentService
+      .createTextOutput(JSON.stringify({'result': 'error', 'error': error.toString()}))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
