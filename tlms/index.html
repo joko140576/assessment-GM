@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test TLMS level GM </title>
-    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
     <style>
@@ -75,9 +74,7 @@
 
         .hidden { display: none !important; }
 
-        /* ====================
-           TIMER STICKY
-        ==================== */
+        /* Timer Sticky */
         #timer-box {
             position: sticky;
             top: 0;
@@ -103,9 +100,9 @@
         .success { background: #d4f7df; color: #2ecc71; border: 1px solid #2ecc71; }
         .error { background: #f9d6d5; color: #c0392b; border: 1px solid #c0392b; }
 
-        /* Modal styles original — unchanged */
         .modal-overlay {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            position: fixed; 
+            top: 0; left: 0; right: 0; bottom: 0;
             background-color: rgba(0, 0, 0, 0.7);
             display: flex; justify-content: center; align-items: center;
             z-index: 1000; opacity: 0; animation: fadeIn 0.3s forwards;
@@ -118,7 +115,7 @@
             max-width: 500px; width: 90%; text-align: center;
             transform: translateY(-20px); animation: slideUp 0.3s forwards;
         }
-         
+
         .modal-btn {
             padding: 10px 18px;
             background: var(--success-color);
@@ -129,11 +126,10 @@
             margin-top: 15px;
             font-size: 16px;
         }
+
         .modal-btn:hover {
             background: #27ae60;
         }
- 
-
 
         @keyframes slideUp { to { transform: translateY(0); } }
 
@@ -146,7 +142,6 @@
 <body>
 <div class="container">
 
-    <!-- TIMER STICKY (ditambahkan) -->
     <div id="timer-box">Waktu: 30:00</div>
 
     <header>
@@ -154,7 +149,7 @@
         <p>TEST LEADERSHIP MANAGERIAL SKILLS GENERAL MANAGER</p>
     </header>
 
-    <!-- BIODATA (asli, tidak diubah) -->
+    <!-- BIODATA -->
     <section class="section" id="section-biodata">
         <h2>Isi Biodata terlebih dahulu</h2>
 
@@ -169,7 +164,7 @@
         </form>
     </section>
 
-    <!-- TES (asli, tidak diubah) -->
+    <!-- TES -->
     <section class="section hidden" id="section-tes">
         <h4>Kerjakan Soal Pilihan ganda...</h4>
         <hr>
@@ -192,10 +187,8 @@
 
     <div id="message" class="message hidden"></div>
 
-    <!-- MODAL (asli) -->
     <div id="modal-loading" class="modal-overlay hidden">
         <div class="modal modal-loading">
-            <div class="loading-spinner"></div>
             <h2>Mengirim Data</h2>
             <p>Sedang mengirim data Anda...</p>
         </div>
@@ -212,34 +205,46 @@
 
 
 <script>
-/* URL GOOGLE SHEET */
-const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycby6WDWDEcE6bPxSKqaviAVJEwbuBHQNZtKLVq3V_8kOAI5vSa0o9bspBMn1p8-10uB_sQ/exec";
+const GOOGLE_SHEET_URL =
+"https://script.google.com/macros/s/AKfycby6WDWDEcE6bPxSKqaviAVJEwbuBHQNZtKLVq3V_8kOAI5vSa0o9bspBMn1p8-10uB_sQ/exec";
 
 /* LOAD SOAL */
 document.addEventListener('DOMContentLoaded', function() {
     loadQuestionsFromSheet();
 });
 
-/* ========== TIMER 30 MENIT ========== */
-let totalSeconds = 35 * 60; // 30 menit
+/* ========== TIMER 30 MENIT + PERINGATAN 5 MENIT ========== */
+let totalSeconds = 35 * 60;
 let timerInterval = null;
+let warningShown = false;
 
 function startTimer() {
+
     document.getElementById("timer-box").style.display = "block";
 
     timerInterval = setInterval(() => {
+
+        totalSeconds--;
+
         let minutes = Math.floor(totalSeconds / 60);
         let seconds = totalSeconds % 60;
 
         document.getElementById("timer-box").textContent =
             `Waktu: ${minutes}:${seconds.toString().padStart(2,"0")}`;
 
-        if (totalSeconds <= 0) {
-            clearInterval(timerInterval);
-            document.getElementById("tes-form").submit(); // auto submit
+        /* === Peringatan 5 menit === */
+        if (totalSeconds === 300 && !warningShown) {
+            warningShown = true;
+            alert("⚠️ Waktu tinggal 5 menit! Segera submit.");
         }
 
-        totalSeconds--;
+        /* === Waktu habis → Auto Submit dengan requestSubmit() === */
+        if (totalSeconds <= 0) {
+            clearInterval(timerInterval);
+            alert("⏰ Waktu habis! Jawaban dikirim otomatis.");
+            document.getElementById("tes-form").requestSubmit();
+        }
+
     }, 1000);
 }
 
@@ -281,12 +286,9 @@ function generateQuestionsHTML() {
     });
 }
 
-/* BUTTON NEXT (Start Timer) */
+/* NEXT BUTTON (Start Timer) */
 document.getElementById("btn-next").onclick = () => {
-    if (!document.getElementById("nama").value ||
-        !document.getElementById("npp").value ||
-        !document.getElementById("divisi").value) {
-
+    if (!nama.value || !npp.value || !divisi.value) {
         showMessage("Harap lengkapi biodata!", "error");
         return;
     }
@@ -294,19 +296,19 @@ document.getElementById("btn-next").onclick = () => {
     document.getElementById("section-biodata").classList.add("hidden");
     document.getElementById("section-tes").classList.remove("hidden");
 
-    startTimer(); // TIMER MULAI DI SINI
+    startTimer();
 };
 
-/* FORM SUBMIT – ASLI TANPA DIUBAH */
+/* FORM SUBMIT */
 document.getElementById("tes-form").onsubmit = async (e) => {
     e.preventDefault();
 
     clearInterval(timerInterval);
 
     const biodata = {
-        nama: document.getElementById("nama").value,
-        npp: document.getElementById("npp").value,
-        divisi: document.getElementById("divisi").value,
+        nama: nama.value,
+        npp: npp.value,
+        divisi: divisi.value,
     };
 
     const answers = getAnswers();
@@ -323,6 +325,7 @@ document.getElementById("tes-form").onsubmit = async (e) => {
             "&nilai=" + score;
 
         await fetch(url);
+
         await new Promise(r => setTimeout(r, 1500));
 
         document.getElementById("modal-loading").classList.add("hidden");
@@ -333,7 +336,7 @@ document.getElementById("tes-form").onsubmit = async (e) => {
     }
 };
 
-/* FUNGSI ASLI — TIDAK DIUBAH */
+/* FUNGSI ASLI */
 function getAnswers() {
     let ans = {};
     for (let i = 0; i < questions.length; i++) {
@@ -358,7 +361,7 @@ function showMessage(text, type) {
     msg.classList.remove("hidden");
 }
 
-    document.getElementById("modal-ok-btn").onclick = () => {
+document.getElementById("modal-ok-btn").onclick = () => {
     document.getElementById("modal-success").classList.add("hidden");
 };
 
