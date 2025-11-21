@@ -3,226 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test TKD level GM </title>
+    <title>Test TKD Level GM</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 
     <style>
-        :root {
-            --primary-color: #3498db;
-            --secondary-color: #2980b9;
-            --accent-color: #e74c3c;
-            --light-color: #ecf0f1;
-            --dark-color: #2c3e50;
-            --success-color: #2ecc71;
-        }
-
-         /* ===== Background ===== */
         body {
-            margin: 0;
-            padding: 0;
+            background: url('https://images.unsplash.com/photo-1560264280-88b68371db39?fm=jpg&q=60&w=3000')
+            center/cover no-repeat fixed;
             font-family: "Segoe UI", Arial, sans-serif;
-            color: var(--dark-color);
-            background: url('https://images.unsplash.com/photo-1560264280-88b68371db39?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8b2ZmaWNlJTIwd29ya3xlbnwwfHwwfHx8MA%3D%3D) center/cover no-repeat fixed') center/cover no-repeat fixed;;
-        }
-    
-        .container {
-            max-width: 900px;
-            margin: auto;
-            padding: 20px;
         }
 
         header {
-            text-align: center;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(135deg, #3498db, #2980b9);
             color: white;
             padding: 25px;
-            border-radius: 8px;
-            margin-bottom: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
         .section {
-            background: white;
+            background: rgba(255,255,255,0.95);
             padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.2);
             margin-top: 25px;
+        }
+
+        .option {
+            padding: 12px;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .form-group { 
-            margin-bottom: 20px; 
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-        
-        .form-group input, .form-group select {
-            width: 100%; 
-            padding: 12px; 
-            border-radius: 5px; 
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-        }
-
-        .btn {
-            background: var(--primary-color);
-            border: none;
-            padding: 14px 20px;
-            color: white;
-            border-radius: 5px;
-            font-size: 16px;
+            transition: 0.3s;
             cursor: pointer;
-            transition: background 0.3s;
         }
-
-        .btn:hover { 
-            background: var(--secondary-color); 
-        }
-
-        .question { 
-            margin-bottom: 25px; 
-            padding-bottom: 15px; 
-            border-bottom: 1px solid #eee; 
-        }
-        
-        .option { 
-            display: flex; 
-            align-items: center; 
-            gap: 10px; 
-            margin: 7px 0; 
-            cursor: pointer; 
-            padding: 8px;
-            border-radius: 5px;
-            transition: background 0.2s;
-        }
-        
         .option:hover {
-            background: rgba(52,152,219,0.1);
+            background: rgba(52,152,219,0.15);
         }
-        
-        .option.selected { 
-            background: rgba(52,152,219,0.2); 
-        }
-
-        .hidden { 
-            display: none !important; 
+        .selected {
+            background: rgba(52,152,219,0.25);
         }
 
-        .message {
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 15px;
-            text-align: center;
+        #timer-box {
+            background: #e74c3c;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+
+            /* ★ ADD: Timer Sticky */
+            position: sticky;
+            top: 0;
+            z-index: 9999;
         }
-        
-        .success { 
-            background: #d4f7df; 
-            color: #2ecc71; 
-            border: 1px solid #2ecc71;
-        }
-        
-        .error { 
-            background: #f9d6d5; 
-            color: #c0392b; 
-            border: 1px solid #c0392b;
-        }
-        
-        /* Modal Styles */
+
+        .hidden { display: none !important; }
+
+        /* Modal overlay */
         .modal-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.7);
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.75);
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            animation: fadeIn 0.3s forwards;
+            z-index: 2000;
         }
-        
-        @keyframes fadeIn {
-            to { opacity: 1; }
-        }
-        
-        .modal {
+
+        .modal-box {
             background: white;
             padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            max-width: 500px;
-            width: 90%;
+            border-radius: 12px;
+            width: 380px;
             text-align: center;
-            transform: translateY(-20px);
-            animation: slideUp 0.3s forwards;
+            animation: fadeIn 0.3s ease;
         }
-        
-        @keyframes slideUp {
-            to { transform: translateY(0); }
-        }
-        
-        .modal h2 {
-            margin-top: 0;
-            color: var(--dark-color);
-        }
-        
-        .modal p {
-            margin: 20px 0;
-            font-size: 16px;
-            line-height: 1.5;
-        }
-        
-        .modal-success {
-            border-top: 4px solid var(--success-color);
-        }
-        
-        .modal-loading {
-            border-top: 4px solid var(--primary-color);
-        }
-        
-        .loading-spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid rgba(52, 152, 219, 0.3);
-            border-radius: 50%;
-            border-top-color: var(--primary-color);
-            animation: spin 1s ease-in-out infinite;
-            margin: 0 auto 20px;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        .modal-btn {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 10px;
-            transition: background 0.3s;
-        }
-        
-        .modal-btn:hover {
-            background: var(--secondary-color);
-        }
-        
-        .btn-container {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        
-        .btn-container .btn {
-            flex: 1;
-        }
+
+        @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+
     </style>
 </head>
 
@@ -236,23 +104,25 @@
 
     <!-- BIODATA -->
     <section class="section" id="section-biodata">
-        <h2>Isi Biodata terlebih dahulu</h2>
+        <h3 class="mb-3">Isi Biodata Terlebih Dahulu</h3>
 
         <form id="biodata-form">
-            <div class="form-group">
-                <label for="nama">Nama Lengkap</label>
-                <input type="text" id="nama" required>
-            </div>
-            <div class="form-group">
-                <label for="npp">NPP</label>
-                <input type="text" id="npp" required>
-            </div>
-            <div class="form-group">
-                <label for="divisi">DIVISI </label>
-                <input type="text" id="divisi" required>
+            <div class="mb-3">
+                <label class="form-label">Nama Lengkap</label>
+                <input type="text" id="nama" class="form-control" required>
             </div>
 
-            <button type="button" class="btn" id="btn-next">
+            <div class="mb-3">
+                <label class="form-label">NPP</label>
+                <input type="text" id="npp" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Divisi</label>
+                <input type="text" id="divisi" class="form-control" required>
+            </div>
+
+            <button type="button" class="btn btn-primary w-100" id="btn-next">
                 <i class="bi bi-arrow-right-circle"></i> Lanjut ke Tes
             </button>
         </form>
@@ -260,288 +130,202 @@
 
     <!-- TES -->
     <section class="section hidden" id="section-tes">
-        <h2>Tes Pengetahuan Umum</h2>
+        <h3 class="mb-2">Tes Pengetahuan Umum</h3>
+
+        <!-- ★ Timer STICKY (TANPA MERUBAH STRUKTUR) -->
+        <div id="timer-box" class="hidden">
+            ⏳ Waktu Tersisa: <span id="timer">30:00</span>
+        </div>
 
         <p id="loading-soal">Memuat soal dari Google Sheets...</p>
 
         <form id="tes-form" class="hidden">
             <div id="questions-container"></div>
 
-            <div class="btn-container">
-                <button type="button" class="btn btn-danger" id="btn-prev">
+            <div class="d-flex gap-2 mt-4">
+                <button type="button" class="btn btn-secondary w-50" id="btn-prev">
                     <i class="bi bi-arrow-left-circle"></i> Kembali
                 </button>
 
-                <button type="submit" class="btn">
+                <button type="submit" class="btn btn-success w-50">
                     <i class="bi bi-send-fill"></i> Kirim Jawaban
                 </button>
             </div>
         </form>
     </section>
 
-    <div id="message" class="message hidden"></div>
-
     <!-- Modal Loading -->
     <div id="modal-loading" class="modal-overlay hidden">
-        <div class="modal modal-loading">
-            <div class="loading-spinner"></div>
-            <h2>Mengirim Data</h2>
-            <p>Sedang mengirim data Anda, harap tunggu...</p>
+        <div class="modal-box">
+            <div class="spinner-border text-primary mb-3" role="status"></div>
+            <h4>Mengirim Data...</h4>
+            <p>Mohon tunggu sebentar.</p>
         </div>
     </div>
 
     <!-- Modal Success -->
     <div id="modal-success" class="modal-overlay hidden">
-        <div class="modal modal-success">
-            <h2>Berhasil!</h2>
-            <p>Data sudah dikirim</p>
-            <button class="modal-btn" id="modal-ok-btn">OK</button>
+        <div class="modal-box">
+            <i class="bi bi-check-circle-fill text-success" style="font-size: 60px;"></i>
+            <h4 class="mt-3">Berhasil!</h4>
+            <p>Data Anda sudah terkirim.</p>
+            <button class="btn btn-primary w-100" id="modal-ok-btn">OK</button>
         </div>
     </div>
 
 </div>
 
 <script>
-/* =============================
-   MASUKKAN URL WEB APP DISINI
-============================= */
-const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbzscmPNIBqjzhn-AqjomTBZhDpzH6mF4uTbuPIKOG_dXqLqduMv9CIY4GudAcyqJuhD/exec";
+/* ----------------- CONFIG ----------------- */
+const GOOGLE_SHEET_URL =
+"https://script.google.com/macros/s/AKfycbzscmPNIBqjzhn-AqjomTBZhDpzH6mF4uTbuPIKOG_dXqLqduMv9CIY4GudAcyqJuhD/exec";
 
-/* =============================
-   Inisialisasi saat halaman dimuat
-============================= */
-document.addEventListener('DOMContentLoaded', function() {
-    // Pastikan modal tersembunyi saat halaman dimuat
-    document.getElementById('modal-loading').classList.add('hidden');
-    document.getElementById('modal-success').classList.add('hidden');
-    
-    // Load questions
-    loadQuestionsFromSheet();
-});
-
-/* =============================
-   1. Load Soal dari Google Sheets
-============================= */
+/* ----------------- LOAD QUESTIONS ----------------- */
 let questions = [];
 
-async function loadQuestionsFromSheet() {
+document.addEventListener("DOMContentLoaded", () => {
+    loadQuestions();
+});
+
+async function loadQuestions() {
     try {
-        const url = GOOGLE_SHEET_URL + "?action=getQuestions";
-        console.log("Loading questions from:", url);
-        
-        const res = await fetch(url);
-        
-        if (!res.ok) {
-            throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        
+        const res = await fetch(GOOGLE_SHEET_URL + "?action=getQuestions");
         const data = await res.json();
-        
-        // Cek jika ada error dari server
-        if (data.error) {
-            throw new Error(data.error);
-        }
-        
-        // Cek jika data kosong
-        if (!data || data.length === 0) {
-            throw new Error("Tidak ada soal yang tersedia");
-        }
-        
+
+        if (data.error) throw new Error(data.error);
+
         questions = data;
-        console.log("Questions loaded:", questions);
-        
         generateQuestionsHTML();
+
         document.getElementById("loading-soal").classList.add("hidden");
         document.getElementById("tes-form").classList.remove("hidden");
-        
-    } catch (err) {
-        console.error("Error loading questions:", err);
-        document.getElementById("loading-soal").innerHTML = 
-            `<span style="color: red;">Gagal memuat soal: ${err.message}</span><br>
-             <small>Pastikan URL Web App sudah benar dan sheet 'Soal' berisi data.</small>`;
+
+    } catch (e) {
+        document.getElementById("loading-soal").innerHTML =
+        "<span class='text-danger'>Gagal memuat soal!</span>";
     }
 }
 
-/* =============================
-   2. Generate HTML Soal Otomatis
-============================= */
+/* ----------------- GENERATE QUESTIONS ----------------- */
 function generateQuestionsHTML() {
     const container = document.getElementById("questions-container");
     container.innerHTML = "";
 
     questions.forEach((q, i) => {
-        const div = document.createElement("div");
-        div.className = "question";
         const num = i + 1;
 
-        div.innerHTML = `
-            <div class="question-text"><strong>${num}. ${q.question}</strong></div>
-            <div class="options">
-                ${Object.entries(q.options).map(([key, val]) => `
-                    <label class="option">
-                        <input type="radio" name="q${num}" value="${key}">
-                        <span>${key.toUpperCase()}. ${val}</span>
-                    </label>
-                `).join("")}
-            </div>
-        `;
+        let div = document.createElement("div");
+        div.className = "mb-4 pb-3 border-bottom";
 
+        div.innerHTML = `
+            <p><strong>${num}. ${q.question}</strong></p>
+            ${Object.entries(q.options)
+                .map(
+                    ([key, val]) => `
+                <label class="option form-check">
+                    <input class="form-check-input" type="radio" name="q${num}" value="${key}">
+                    <span>${key.toUpperCase()}. ${val}</span>
+                </label>`
+                )
+                .join("")}
+        `;
         container.appendChild(div);
     });
 
-    // Tambahkan event listener untuk opsi
-    document.querySelectorAll(".option input").forEach(radio => {
-        radio.addEventListener("change", function() {
-            const opts = this.closest(".options").querySelectorAll(".option");
-            opts.forEach(o => o.classList.remove("selected"));
+    document.querySelectorAll(".option input").forEach(r => {
+        r.addEventListener("change", function () {
             this.closest(".option").classList.add("selected");
+            this.closest("div").querySelectorAll(".option").forEach(opt => {
+                if (opt !== this.closest(".option")) opt.classList.remove("selected");
+            });
         });
     });
 }
 
-/* =============================
-   3. Event Listener
-============================= */
+/* ----------------- TIMER ----------------- */
+let totalSeconds = 30 * 60; 
+let warningShown = false;
+
+function startTimer() {
+    document.getElementById("timer-box").classList.remove("hidden");
+
+    const timerDisplay = document.getElementById("timer");
+
+    let timer = setInterval(() => {
+        totalSeconds--;
+
+        let m = Math.floor(totalSeconds / 60);
+        let s = totalSeconds % 60;
+
+        timerDisplay.textContent = 
+            `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+
+        if (totalSeconds === 300 && !warningShown) {
+            warningShown = true;
+            alert("⚠️ Waktu tersisa 5 menit!");
+        }
+
+        if (totalSeconds <= 0) {
+            clearInterval(timer);
+            alert("⏰ Waktu habis! Jawaban Anda dikirim otomatis.");
+            document.getElementById("tes-form").requestSubmit();
+        }
+    }, 1000);
+}
+
+/* ----------------- NEXT BUTTON ----------------- */
 document.getElementById("btn-next").onclick = () => {
-    // Validasi biodata sebelum lanjut
-    const nama = document.getElementById("nama").value.trim();
-    const npp = document.getElementById("npp").value.trim();
-    const divisi = document.getElementById("divisi").value.trim();
-    
-    
-    if (!nama || !npp || !divisi ) {
-        showMessage("Harap lengkapi semua data biodata!", "error");
+    if (!nama.value || !npp.value || !divisi.value) {
+        alert("Isi biodata lengkap!");
         return;
     }
-    
+
     document.getElementById("section-biodata").classList.add("hidden");
     document.getElementById("section-tes").classList.remove("hidden");
+
+    setTimeout(startTimer, 600);
 };
 
-document.getElementById("btn-prev").onclick = () => {
-    document.getElementById("section-tes").classList.add("hidden");
-    document.getElementById("section-biodata").classList.remove("hidden");
-};
-
-// Event listener untuk tombol OK di modal sukses
-document.getElementById("modal-ok-btn").onclick = () => {
-    resetForm();
-    document.getElementById("modal-success").classList.add("hidden");
-};
-
-/* =============================
-   4. Validasi dan Submit
-============================= */
-document.getElementById("tes-form").onsubmit = async (e) => {
+/* ----------------- SUBMIT TES ----------------- */
+document.getElementById("tes-form").onsubmit = async e => {
     e.preventDefault();
 
-    if (!validateTest()) {
-        showMessage("Masih ada soal yang belum dijawab!", "error");
-        return;
-    }
+    let correct = 0;
 
-    const biodata = {
-        nama: document.getElementById("nama").value,
-        npp: document.getElementById("npp").value,
-        divisi: document.getElementById("divisi").value,
-        
-    };
+    questions.forEach((q, i) => {
+        let num = i + 1;
+        let val = document.querySelector(`input[name="q${num}"]:checked`);
+        if (val && val.value === q.correct) correct++;
+    });
 
-    const answers = getAnswers();
-    const score = calculateScore(answers);
+    let score = Math.round((correct / questions.length) * 100);
 
-    // Tampilkan modal loading
     document.getElementById("modal-loading").classList.remove("hidden");
 
-    // Kirim data ke Google Sheets
     try {
-        const url = GOOGLE_SHEET_URL + 
+        const url =
+            GOOGLE_SHEET_URL +
             "?action=saveResult" +
-            "&nama=" + encodeURIComponent(biodata.nama) +
-            "&npp=" + encodeURIComponent(biodata.npp) +
-            "&divisi=" + encodeURIComponent(biodata.divisi) +
+            "&nama=" + encodeURIComponent(nama.value) +
+            "&npp=" + encodeURIComponent(npp.value) +
+            "&divisi=" + encodeURIComponent(divisi.value) +
             "&nilai=" + score;
 
-        const response = await fetch(url);
-        const result = await response.json();
-        
-        if (result.error) {
-            throw new Error(result.error);
-        }
-        
-        // Simulasi loading untuk demo (bisa dihapus di production)
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        
-        // Sembunyikan modal loading dan tampilkan modal sukses
+        await fetch(url);
+
         document.getElementById("modal-loading").classList.add("hidden");
         document.getElementById("modal-success").classList.remove("hidden");
-        
-    } catch (error) {
-        // Sembunyikan modal loading dan tampilkan pesan error
+
+    } catch (e) {
         document.getElementById("modal-loading").classList.add("hidden");
-        showMessage(`Tes selesai! Nilai: ${score}. Tapi gagal menyimpan data: ${error.message}`, "error");
+        alert("Gagal kirim data!");
     }
 };
 
-/* =============================
-   Fungsi Pendukung
-============================= */
-function validateTest() {
-    let valid = true;
-    for (let i = 0; i < questions.length; i++) {
-        if (!document.querySelector(`input[name="q${i+1}"]:checked`)) {
-            valid = false;
-            break;
-        }
-    }
-    return valid;
-}
-
-function getAnswers() {
-    let ans = {};
-    for (let i = 0; i < questions.length; i++) {
-        const selected = document.querySelector(`input[name="q${i+1}"]:checked`);
-        ans[`q${i+1}`] = selected ? selected.value : null;
-    }
-    return ans;
-}
-
-function calculateScore(answers) {
-    let correctCount = 0;
-    
-    questions.forEach((q, i) => {
-        if (answers[`q${i+1}`] === q.correct) {
-            correctCount++;
-        }
-    });
-    
-    const score = (correctCount / questions.length) * 100;
-    return Math.round(score);
-}
-
-function showMessage(text, type) {
-    const msg = document.getElementById("message");
-    msg.textContent = text;
-    msg.className = `message ${type}`;
-    msg.classList.remove("hidden");
-
-    setTimeout(() => msg.classList.add("hidden"), 5000);
-}
-
-function resetForm() {
-    document.getElementById("biodata-form").reset();
-    document.getElementById("tes-form").reset();
-    document.getElementById("section-tes").classList.add("hidden");
-    document.getElementById("section-biodata").classList.remove("hidden");
-    
-    // Reset pilihan jawaban
-    document.querySelectorAll(".option").forEach(opt => {
-        opt.classList.remove("selected");
-    });
-    
-    // Reset pesan
-    document.getElementById("message").classList.add("hidden");
-}
+/* ----------------- OK BUTTON ----------------- */
+document.getElementById("modal-ok-btn").onclick = () => {
+    location.reload();
+};
 </script>
 
 </body>
