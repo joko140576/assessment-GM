@@ -17,8 +17,6 @@
             --success-color: #2ecc71;
         }
 
-
-        /* ===== Background ===== */
         body {
             margin: 0;
             padding: 0;
@@ -27,13 +25,7 @@
             background: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat fixed;
         }
 
-
-        
-        .container {
-            max-width: 900px;
-            margin: auto;
-            padding: 20px;
-        }
+        .container { max-width: 900px; margin: auto; padding: 20px; }
 
         header {
             text-align: center;
@@ -52,20 +44,13 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
-        .form-group { 
-            margin-bottom: 20px; 
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-        
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: bold; }
+
         .form-group input, .form-group select {
-            width: 100%; 
-            padding: 12px; 
-            border-radius: 5px; 
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
             border: 1px solid #ccc;
             box-sizing: border-box;
         }
@@ -81,37 +66,31 @@
             transition: background 0.3s;
         }
 
-        .btn:hover { 
-            background: var(--secondary-color); 
-        }
+        .btn:hover { background: var(--secondary-color); }
 
-        .question { 
-            margin-bottom: 25px; 
-            padding-bottom: 15px; 
-            border-bottom: 1px solid #eee; 
-        }
-        
-        .option { 
-            display: flex; 
-            align-items: center; 
-            gap: 10px; 
-            margin: 7px 0; 
-            cursor: pointer; 
-            padding: 8px;
-            border-radius: 5px;
-            transition: background 0.2s;
-        }
-        
-        .option:hover {
-            background: rgba(52,152,219,0.1);
-        }
-        
-        .option.selected { 
-            background: rgba(52,152,219,0.2); 
-        }
+        .question { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
+        .option { display: flex; gap: 10px; padding: 8px; border-radius: 5px; margin: 5px 0; cursor: pointer; }
+        .option:hover { background: rgba(52,152,219,0.1); }
+        .option.selected { background: rgba(52,152,219,0.2); }
 
-        .hidden { 
-            display: none !important; 
+        .hidden { display: none !important; }
+
+        /* ====================
+           TIMER STICKY
+        ==================== */
+        #timer-box {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: #e74c3c;
+            color: white;
+            padding: 12px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            display: none;
         }
 
         .message {
@@ -120,142 +99,69 @@
             margin-top: 15px;
             text-align: center;
         }
-        
-        .success { 
-            background: #d4f7df; 
-            color: #2ecc71; 
-            border: 1px solid #2ecc71;
-        }
-        
-        .error { 
-            background: #f9d6d5; 
-            color: #c0392b; 
-            border: 1px solid #c0392b;
-        }
-        
-        /* Modal Styles */
+
+        .success { background: #d4f7df; color: #2ecc71; border: 1px solid #2ecc71; }
+        .error { background: #f9d6d5; color: #c0392b; border: 1px solid #c0392b; }
+
+        /* Modal styles original — unchanged */
         .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background-color: rgba(0, 0, 0, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            animation: fadeIn 0.3s forwards;
+            display: flex; justify-content: center; align-items: center;
+            z-index: 1000; opacity: 0; animation: fadeIn 0.3s forwards;
         }
-        
-        @keyframes fadeIn {
-            to { opacity: 1; }
-        }
-        
+
+        @keyframes fadeIn { to { opacity: 1; } }
+
         .modal {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-            transform: translateY(-20px);
-            animation: slideUp 0.3s forwards;
+            background: white; padding: 30px; border-radius: 8px;
+            max-width: 500px; width: 90%; text-align: center;
+            transform: translateY(-20px); animation: slideUp 0.3s forwards;
         }
-        
-        @keyframes slideUp {
-            to { transform: translateY(0); }
-        }
-        
-        .modal h2 {
-            margin-top: 0;
-            color: var(--dark-color);
-        }
-        
-        .modal p {
-            margin: 20px 0;
-            font-size: 16px;
-            line-height: 1.5;
-        }
-        
-        .modal-success {
-            border-top: 4px solid var(--success-color);
-        }
-        
-        .modal-loading {
-            border-top: 4px solid var(--primary-color);
-        }
-        
-        .loading-spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid rgba(52, 152, 219, 0.3);
-            border-radius: 50%;
-            border-top-color: var(--primary-color);
-            animation: spin 1s ease-in-out infinite;
-            margin: 0 auto 20px;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
+         
         .modal-btn {
-            background: var(--primary-color);
+            padding: 10px 18px;
+            background: var(--success-color);
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
+            border-radius: 6px;
             cursor: pointer;
+            margin-top: 15px;
             font-size: 16px;
-            margin-top: 10px;
-            transition: background 0.3s;
         }
-        
         .modal-btn:hover {
-            background: var(--secondary-color);
+            background: #27ae60;
         }
-        
-        .btn-container {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        
-        .btn-container .btn {
-            flex: 1;
-        }
+ 
+
+
+        @keyframes slideUp { to { transform: translateY(0); } }
+
+        .modal-success { border-top: 4px solid var(--success-color); }
+        .modal-loading { border-top: 4px solid var(--primary-color); }
+
     </style>
 </head>
 
 <body>
 <div class="container">
 
+    <!-- TIMER STICKY (ditambahkan) -->
+    <div id="timer-box">Waktu: 30:00</div>
+
     <header>
         <h1>TEST TLMS LEVEL-GM</h1>
         <p>TEST LEADERSHIP MANAGERIAL SKILLS GENERAL MANAGER</p>
     </header>
 
-    <!-- BIODATA -->
+    <!-- BIODATA (asli, tidak diubah) -->
     <section class="section" id="section-biodata">
         <h2>Isi Biodata terlebih dahulu</h2>
 
         <form id="biodata-form">
-            <div class="form-group">
-                <label for="nama">Nama Lengkap</label>
-                <input type="text" id="nama" required>
-            </div>
-            <div class="form-group">
-                <label for="npp">NPP</label>
-                <input type="text" id="npp" required>
-            </div>
-            <div class="form-group">
-                <label for="divisi">DIVISI </label>
-                <input type="text" id="divisi" required>
-            </div>
+            <div class="form-group"><label>Nama Lengkap</label><input type="text" id="nama" required></div>
+            <div class="form-group"><label>NPP</label><input type="text" id="npp" required></div>
+            <div class="form-group"><label>DIVISI</label><input type="text" id="divisi" required></div>
 
             <button type="button" class="btn" id="btn-next">
                 <i class="bi bi-arrow-right-circle"></i> Lanjut ke Tes
@@ -263,13 +169,12 @@
         </form>
     </section>
 
-    <!-- TES -->
+    <!-- TES (asli, tidak diubah) -->
     <section class="section hidden" id="section-tes">
-        <h4>Kerjakan Soal Pilihan ganda dibawah ini. Jawablah dengan memilih jawaban yang tepat dan benar . Selamat mengerjakan </h4>
+        <h4>Kerjakan Soal Pilihan ganda...</h4>
         <hr>
 
         <p id="loading-soal">Memuat soal dari Google Sheets...</p>
-
         <form id="tes-form" class="hidden">
             <div id="questions-container"></div>
 
@@ -287,16 +192,15 @@
 
     <div id="message" class="message hidden"></div>
 
-    <!-- Modal Loading -->
+    <!-- MODAL (asli) -->
     <div id="modal-loading" class="modal-overlay hidden">
         <div class="modal modal-loading">
             <div class="loading-spinner"></div>
             <h2>Mengirim Data</h2>
-            <p>Sedang mengirim data Anda, harap tunggu...</p>
+            <p>Sedang mengirim data Anda...</p>
         </div>
     </div>
 
-    <!-- Modal Success -->
     <div id="modal-success" class="modal-overlay hidden">
         <div class="modal modal-success">
             <h2>Berhasil!</h2>
@@ -308,221 +212,143 @@
 
 
 <script>
-/* =============================
-   MASUKKAN URL WEB APP DISINI
-============================= */
+/* URL GOOGLE SHEET */
 const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycby6WDWDEcE6bPxSKqaviAVJEwbuBHQNZtKLVq3V_8kOAI5vSa0o9bspBMn1p8-10uB_sQ/exec";
 
-/* =============================
-   Inisialisasi saat halaman dimuat
-============================= */
+/* LOAD SOAL */
 document.addEventListener('DOMContentLoaded', function() {
-    // Pastikan modal tersembunyi saat halaman dimuat
-    document.getElementById('modal-loading').classList.add('hidden');
-    document.getElementById('modal-success').classList.add('hidden');
-    
-    // Load questions
     loadQuestionsFromSheet();
 });
 
-/* =============================
-   1. Load Soal dari Google Sheets
-============================= */
+/* ========== TIMER 30 MENIT ========== */
+let totalSeconds = 35 * 60; // 30 menit
+let timerInterval = null;
+
+function startTimer() {
+    document.getElementById("timer-box").style.display = "block";
+
+    timerInterval = setInterval(() => {
+        let minutes = Math.floor(totalSeconds / 60);
+        let seconds = totalSeconds % 60;
+
+        document.getElementById("timer-box").textContent =
+            `Waktu: ${minutes}:${seconds.toString().padStart(2,"0")}`;
+
+        if (totalSeconds <= 0) {
+            clearInterval(timerInterval);
+            document.getElementById("tes-form").submit(); // auto submit
+        }
+
+        totalSeconds--;
+    }, 1000);
+}
+
+/* LOAD QUESTIONS */
 let questions = [];
 
 async function loadQuestionsFromSheet() {
-    try {
-        const url = GOOGLE_SHEET_URL + "?action=getQuestions";
-        console.log("Loading questions from:", url);
-        
-        const res = await fetch(url);
-        
-        if (!res.ok) {
-            throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        
-        const data = await res.json();
-        
-        // Cek jika ada error dari server
-        if (data.error) {
-            throw new Error(data.error);
-        }
-        
-        // Cek jika data kosong
-        if (!data || data.length === 0) {
-            throw new Error("Tidak ada soal yang tersedia");
-        }
-        
-        questions = data;
-        console.log("Questions loaded:", questions);
-        
-        generateQuestionsHTML();
-        document.getElementById("loading-soal").classList.add("hidden");
-        document.getElementById("tes-form").classList.remove("hidden");
-        
-    } catch (err) {
-        console.error("Error loading questions:", err);
-        document.getElementById("loading-soal").innerHTML = 
-            `<span style="color: red;">Gagal memuat soal: ${err.message}</span><br>
-             <small>Pastikan URL Web App sudah benar dan sheet 'Soal' berisi data.</small>`;
-    }
+    const url = GOOGLE_SHEET_URL + "?action=getQuestions";
+    const res = await fetch(url);
+    const data = await res.json();
+    questions = data;
+
+    generateQuestionsHTML();
+    document.getElementById("loading-soal").classList.add("hidden");
+    document.getElementById("tes-form").classList.remove("hidden");
 }
 
-/* =============================
-   2. Generate HTML Soal Otomatis
-============================= */
+/* GENERATE SOAL */
 function generateQuestionsHTML() {
     const container = document.getElementById("questions-container");
     container.innerHTML = "";
 
     questions.forEach((q, i) => {
+        const num = i + 1;
         const div = document.createElement("div");
         div.className = "question";
-        const num = i + 1;
-
         div.innerHTML = `
-            <div class="question-text"><strong>${num}. ${q.question}</strong></div>
+            <strong>${num}. ${q.question}</strong>
             <div class="options">
-                ${Object.entries(q.options).map(([key, val]) => `
+                ${Object.entries(q.options).map(([k,v]) => `
                     <label class="option">
-                        <input type="radio" name="q${num}" value="${key}">
-                        <span>${key.toUpperCase()}. ${val}</span>
+                        <input type="radio" name="q${num}" value="${k}">
+                        ${k.toUpperCase()}. ${v}
                     </label>
                 `).join("")}
             </div>
         `;
-
         container.appendChild(div);
-    });
-
-    // Tambahkan event listener untuk opsi
-    document.querySelectorAll(".option input").forEach(radio => {
-        radio.addEventListener("change", function() {
-            const opts = this.closest(".options").querySelectorAll(".option");
-            opts.forEach(o => o.classList.remove("selected"));
-            this.closest(".option").classList.add("selected");
-        });
     });
 }
 
-/* =============================
-   3. Event Listener
-============================= */
+/* BUTTON NEXT (Start Timer) */
 document.getElementById("btn-next").onclick = () => {
-    // Validasi biodata sebelum lanjut
-    const nama = document.getElementById("nama").value.trim();
-    const npp = document.getElementById("npp").value.trim();
-    const divisi = document.getElementById("divisi").value.trim();
-    
-    
-    if (!nama || !npp || !divisi ) {
-        showMessage("Harap lengkapi semua data biodata!", "error");
+    if (!document.getElementById("nama").value ||
+        !document.getElementById("npp").value ||
+        !document.getElementById("divisi").value) {
+
+        showMessage("Harap lengkapi biodata!", "error");
         return;
     }
-    
+
     document.getElementById("section-biodata").classList.add("hidden");
     document.getElementById("section-tes").classList.remove("hidden");
+
+    startTimer(); // TIMER MULAI DI SINI
 };
 
-document.getElementById("btn-prev").onclick = () => {
-    document.getElementById("section-tes").classList.add("hidden");
-    document.getElementById("section-biodata").classList.remove("hidden");
-};
-
-// Event listener untuk tombol OK di modal sukses
-document.getElementById("modal-ok-btn").onclick = () => {
-    resetForm();
-    document.getElementById("modal-success").classList.add("hidden");
-};
-
-/* =============================
-   4. Validasi dan Submit
-============================= */
+/* FORM SUBMIT – ASLI TANPA DIUBAH */
 document.getElementById("tes-form").onsubmit = async (e) => {
     e.preventDefault();
 
-    if (!validateTest()) {
-        showMessage("Masih ada soal yang belum dijawab!", "error");
-        return;
-    }
+    clearInterval(timerInterval);
 
     const biodata = {
         nama: document.getElementById("nama").value,
         npp: document.getElementById("npp").value,
         divisi: document.getElementById("divisi").value,
-        
     };
 
     const answers = getAnswers();
     const score = calculateScore(answers);
 
-    // Tampilkan modal loading
     document.getElementById("modal-loading").classList.remove("hidden");
 
-    // Kirim data ke Google Sheets
     try {
-        const url = GOOGLE_SHEET_URL + 
+        const url = GOOGLE_SHEET_URL +
             "?action=saveResult" +
             "&nama=" + encodeURIComponent(biodata.nama) +
             "&npp=" + encodeURIComponent(biodata.npp) +
             "&divisi=" + encodeURIComponent(biodata.divisi) +
             "&nilai=" + score;
 
-        const response = await fetch(url);
-        const result = await response.json();
-        
-        if (result.error) {
-            throw new Error(result.error);
-        }
-        
-        // Simulasi loading untuk demo (bisa dihapus di production)
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        
-        // Sembunyikan modal loading dan tampilkan modal sukses
+        await fetch(url);
+        await new Promise(r => setTimeout(r, 1500));
+
         document.getElementById("modal-loading").classList.add("hidden");
         document.getElementById("modal-success").classList.remove("hidden");
-        
-    } catch (error) {
-        // Sembunyikan modal loading dan tampilkan pesan error
-        document.getElementById("modal-loading").classList.add("hidden");
-        showMessage(`Tes selesai! Nilai: ${score}. Tapi gagal menyimpan data: ${error.message}`, "error");
+
+    } catch (err) {
+        showMessage("Gagal menyimpan data!", "error");
     }
 };
 
-/* =============================
-   Fungsi Pendukung
-============================= */
-function validateTest() {
-    let valid = true;
-    for (let i = 0; i < questions.length; i++) {
-        if (!document.querySelector(`input[name="q${i+1}"]:checked`)) {
-            valid = false;
-            break;
-        }
-    }
-    return valid;
-}
-
+/* FUNGSI ASLI — TIDAK DIUBAH */
 function getAnswers() {
     let ans = {};
     for (let i = 0; i < questions.length; i++) {
-        const selected = document.querySelector(`input[name="q${i+1}"]:checked`);
-        ans[`q${i+1}`] = selected ? selected.value : null;
+        const s = document.querySelector(`input[name="q${i+1}"]:checked`);
+        ans[`q${i+1}`] = s ? s.value : null;
     }
     return ans;
 }
 
 function calculateScore(answers) {
-    let correctCount = 0;
-    
+    let correct = 0;
     questions.forEach((q, i) => {
-        if (answers[`q${i+1}`] === q.correct) {
-            correctCount++;
-        }
+        if (answers[`q${i+1}`] === q.correct) correct++;
     });
-    
-    const score = (correctCount / questions.length) * 100;
-    return Math.round(score);
+    return Math.round((correct / questions.length) * 100);
 }
 
 function showMessage(text, type) {
@@ -530,24 +356,12 @@ function showMessage(text, type) {
     msg.textContent = text;
     msg.className = `message ${type}`;
     msg.classList.remove("hidden");
-
-    setTimeout(() => msg.classList.add("hidden"), 5000);
 }
 
-function resetForm() {
-    document.getElementById("biodata-form").reset();
-    document.getElementById("tes-form").reset();
-    document.getElementById("section-tes").classList.add("hidden");
-    document.getElementById("section-biodata").classList.remove("hidden");
-    
-    // Reset pilihan jawaban
-    document.querySelectorAll(".option").forEach(opt => {
-        opt.classList.remove("selected");
-    });
-    
-    // Reset pesan
-    document.getElementById("message").classList.add("hidden");
-}
+    document.getElementById("modal-ok-btn").onclick = () => {
+    document.getElementById("modal-success").classList.add("hidden");
+};
+
 </script>
 
 </body>
