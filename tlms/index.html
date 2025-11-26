@@ -156,7 +156,23 @@
         <form id="biodata-form">
             <div class="form-group"><label>Nama Lengkap</label><input type="text" id="nama" required></div>
             <div class="form-group"><label>NPP</label><input type="text" id="npp" required></div>
-            <div class="form-group"><label>DIVISI</label><input type="text" id="divisi" required></div>
+            <div class="form-group">
+                <label>DIVISI</label>
+                    <select id="divisi" required>
+                        <option value="">-- Pilih Divisi --</option>
+                        <option value="CSI">CSI</option>
+                        <option value="FRM">FRM</option>
+                        <option value="INA">INA</option>
+                        <option value="HCC">HCC</option>
+                        <option value="MBS">MBS</option>
+                        <option value="OPR-1">OPR-1</option>
+                        <option value="OPR-2">OPR-2</option>
+                        <option value="OPS">OPS</option>
+                        <option value="PLM">PLM</option>
+                        <option value="SBD">SBD</option>
+                    </select>
+            </div>
+
 
             <button type="button" class="btn" id="btn-next">
                 <i class="bi bi-arrow-right-circle"></i> Lanjut ke Tes
